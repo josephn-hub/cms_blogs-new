@@ -1,5 +1,8 @@
 # cms_blogs-new
 
+# Docker postgres container:
+docker run --name cms-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres@sql -d postgres
+
 # Docker file, Image, Container
 FROM python:3.7
 WORKDIR /cms-blogs
