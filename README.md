@@ -22,6 +22,11 @@ VOLUME [ "/data" ]
 
 CMD [ "python", "./app/main.py" ; "python", "./pytests/test_utile.py"  ]
 
+# Volume creation
+
+ docker volume create output
+ 
+
 # Docker container creation:
 docker build -t cms-blogs .
 docker run -it --rm --name cms-test01 -v output:/data  cms-blogs /bin/bash
