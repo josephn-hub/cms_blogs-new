@@ -1,7 +1,7 @@
 # cms_blogs-new
 A basic CMS system running on PostgreSQL.
 This database has a schema named ‘CMS’ and a table named ‘Blogs’.
-These columns should be: - Id, Author, Published On, Blog Text, Created On
+The columns are: - Id, Author, Published On, Blog Text, Created On
 A member of the team has asked for several CSV files to be created.
 Each CSV file should be a unique CSV file in the following format:
 
