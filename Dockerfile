@@ -13,6 +13,6 @@ COPY ./app ./app
 COPY ./pytests ./pytests
 COPY ./data ./data
 
-VOLUME [ "/data" ]
+VOLUME [ "/data/blog_data/" ]
 
 CMD [ "python", "./app/main.py" ; "python", "./pytests/test_utile.py"  ]
