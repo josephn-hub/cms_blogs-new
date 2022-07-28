@@ -16,16 +16,15 @@ class CmsBlogs(object):
         header_list = ['Id', 'Name', 'Published_date', 'blog_Text', 'created_date']
         cur.execute(query)
         for record in cur.fetchall():
-            with open(self.path + record[1] + "-" + record[4].strftime(
-                    "%b") + "-" + "Published-blogs.csv", 'a') as f:
+            pub_filename=self.path + record[1] + "-" + record[4].strftime(
+                "%b") + "-" + "Published-blogs.csv"
+            with open(pub_filename, 'a') as f:
                 writer = csv.writer(f)
                 writer.writerow(record)
 
-            df = pd.read_csv(self.path + record[1] + "-" + record[4].strftime(
-                "%b") + "-" + "Published-blogs.csv", sep=",")
+            df = pd.read_csv(pub_filename, sep=",")
             df.drop_duplicates(subset=None, inplace=True)
-            df.to_csv(self.path + record[1] + "-" + record[4].strftime(
-                "%b") + "-" + "Published-blogs.csv", header=header_list, index=False)
+            df.to_csv(pub_filename, header=header_list, index=False)
         cur.close()
 
     def draft_blogs(self):
@@ -34,14 +33,14 @@ class CmsBlogs(object):
         header_list = ['Id', 'Name', 'Published_date', 'blog_Text', 'created_date']
         cur.execute(query)
         for record in cur.fetchall():
-            with open(self.path + record[1] + "-" + record[4].strftime('%b') + "-" + "Draft-blogs.csv", 'a') as f:
+            draft_filename=self.path + record[1] + "-" + record[4].strftime(
+                "%b") + "-" + "Draft-blogs.csv"
+            with open(draft_filename, 'a') as f:
                 writer = csv.writer(f)
                 writer.writerow(record)
-            df = pd.read_csv(self.path + record[1] + "-" + record[4].strftime(
-                "%b") + "-" + "Draft-blogs.csv", sep=",")
+            df = pd.read_csv(draft_filename, sep=",")
             df.drop_duplicates(subset=None, inplace=True)
-            df.to_csv(self.path + record[1] + "-" + record[4].strftime(
-                "%b") + "-" + "Draft-blogs.csv", header=header_list, index=False)
+            df.to_csv(draft_filename, header=header_list, index=False)
         cur.close()
 
     def close(self):
@@ -69,7 +68,7 @@ if __name__ == "__main__":
     db.draft_blogs_view()
     print("Draft view created")
 
-    db1 = CmsBlogs(conn, "/data/")
+    db1 = CmsBlogs(conn, "/data/blog_data/")
     db1.published_blogs()
     print("Published blogs loaded to csv")
     db1.draft_blogs()
